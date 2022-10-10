@@ -34,6 +34,18 @@ class App extends Component {
       });
     });
   }
+  updateNumberOfEvents = (number) => {
+    getEvents().then((events) => {
+      let updatedEvents = []
+      for (let i = 1; i <= number; i++) {
+        updatedEvents.push(events[i])
+
+      }
+      this.setState({
+        events: updatedEvents
+      });
+    });
+  }
 
   render() {
 
@@ -41,7 +53,7 @@ class App extends Component {
     return (
       <div className="App">
         <CitySearch locations={this.state.locations} updateEvents={this.updateEvents} />
-        <NumberOfEvents />
+        <NumberOfEvents updateNumberOfEvents={this.updateNumberOfEvents} />
         <EventList events={this.state.events} />
       </div>
     );

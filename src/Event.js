@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import './Event.css'
 
 
 class Event extends Component {
@@ -10,7 +11,16 @@ class Event extends Component {
 
 
     clickHandler = () => {
-        this.setState({ isVisible: !this.state.isVisible });
+        if (this.state.isVisible !== true) {
+            this.setState({
+                isVisible: true
+            })
+        } else {
+            this.setState({
+                isVisible: false
+            })
+        }
+        console.log(this.state.isVisible)
     };
 
     render() {
@@ -21,14 +31,15 @@ class Event extends Component {
             <div className='event-item'>
                 <h2>{event.summary}</h2>
                 <p>{event.description}</p>
-                <button className='toggle-collapse' onClick={this.clickHandler}>
-                    Details
-                </button>
-                <div className={isVisible ? "event-details visible" : "event-details"}>
+
+                <div className={isVisible === true ? "event-details visible" : "event-details"}>
                     <h3>Location: {event.location}</h3>
                     <p>From: {event.start.dateTime}</p>
                     <p>Until: {event.end.dateTime}</p>
                 </div>
+                <button className='toggle-collapse' onClick={this.clickHandler}>
+                    Details
+                </button>
             </div>
         );
     }

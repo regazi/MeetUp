@@ -37,10 +37,19 @@ describe('<NumberOfEvents /> component', () => {
     });
     test('input cannot exceed 30', () => {
         NoEwrapper.setState({
-            query: '10'
+            query: 10
         });
         const eventObject = { target: { value: '40' } };
         NoEwrapper.find('.numberOfEvents').simulate('input', eventObject);
         expect(NoEwrapper.state('query')).toBe(30);
+    });
+
+    test('get correct number of events as selected by the user', () => {
+        NoEwrapper.setState({
+            query: 30
+        });
+        const Event = { target: { value: 6 } };
+        NoEwrapper.find('.numberOfEvents').simulate('change', Event);
+        expect(NoEwrapper.state('numberOfEvents')).toBe(6);
     });
 });

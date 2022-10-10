@@ -8,13 +8,20 @@ class NumberOfEvents extends Component {
         this.setState({
             query: value
         });
+        this.props.updateNumberOfEvents(value)
     }
     handleInputChanged = (event) => {
-        let min = "1";
-        let max = "30";
-        let value = event.target.value;
-        value = Math.max(min, Math.min(max, Number(event.target.value)));
-        this.setValue(value);
+        const min = 1;
+        const max = 30;
+        let value = parseInt(event.target.value);
+        if (value >= max) {
+            this.setValue(max);
+        } else if (value <= min) {
+            this.setValue(min);
+        } else {
+            this.setValue(value)
+        }
+
         //NOTE: DATA LEAVING AS INT
 
     }

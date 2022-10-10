@@ -10,7 +10,7 @@ export const extractLocations = (events) => {
 const getToken = async (code) => {
     const encodeCode = encodeURIComponent(code);
     const { access_token } = await fetch(
-        `https://d2tvi9usq2.execute-api.us-east-1.amazonaws.com/dev/api/token ${encodeCode}`
+        `${'https://d2tvi9usq2.execute-api.us-east-1.amazonaws.com/dev/api/token/' + encodeCode}`
     )
         .then((res) => {
             return res.json();
@@ -64,12 +64,12 @@ const checkToken = async (accessToken) => {
 };
 export const getEvents = async () => {
     NProgress.start();
-    /*
+
     if (window.location.href.startsWith('http://localhost')) {
         NProgress.done();
         return mockData;
     }
-    */
+
     const token = await getAccessToken();
 
     if (token) {
