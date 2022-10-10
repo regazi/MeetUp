@@ -22,7 +22,7 @@ class NumberOfEvents extends Component {
     render() {
         return (
             <form className="numberOfEventsInput">
-                <input type="number" className="numberOfEvents" value={this.state.query} defaultValue={10} onInput={this.handleInputChanged} />
+                <input type="number" className="numberOfEvents" value={this.state.query} onInput={this.handleInputChanged} />
             </form>
 
 
