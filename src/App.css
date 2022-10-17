@@ -76,7 +76,7 @@ input[type="number"] {
   background-color: #bcdcdb;
 }
 
-.event {
+.event-item {
   padding: 10px 10px 35px;
   margin-bottom: 10px;
   text-align: left;
@@ -85,7 +85,7 @@ input[type="number"] {
   position: relative;
 }
 
-.details-btn {
+.toggle-collapse {
   position: absolute;
   right: 5px;
   bottom: 5px;
@@ -130,8 +130,16 @@ input[type="number"] {
 
 .Alert {
   position: fixed;
-  top: 20px;
+  width: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  border: 1px solid rgba(193, 73, 73, 0.492);
+  background: rgb(186, 176, 176);
+  padding: 4px;
+  margin: 0;
 }
+
 
 .data-vis-wrapper {
   display: flex;
@@ -167,10 +175,12 @@ input[type="number"] {
   border-radius: 2px;
   box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.25);
 }
-.google-btn:hover {
+.google-btn:hover,
+.toggle-collapse:hover {
   box-shadow: 0 0 6px #4285f4;
 }
-.google-btn:active {
+.google-btn:active,
+.toggle-collapse:active {
   background: #1669f2;
 }
 .google-icon-wrapper {

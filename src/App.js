@@ -5,11 +5,11 @@ import './App.css';
 import EventList from './EventList';
 import NumberOfEvents from './NumberOfEvents';
 import CitySearch from './CitySearch';
-import { mockData } from "./mock-data";
+//import { mockData } from "./mock-data";
 class App extends Component {
   state = {
-    events: mockData,
-    locations: extractLocations(mockData),
+    events: [],
+    locations: [],
   }
 
   componentDidMount() {
