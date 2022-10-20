@@ -14,9 +14,6 @@ class CitySearch extends Component {
     }
 
 
-
-
-
     handleInputChanged = (event) => {
         const value = event.target.value;
         console.log(value)
@@ -51,7 +48,6 @@ class CitySearch extends Component {
     }
     render() {
         return (
-
             <div className="CitySearch" id="CitySearch">
                 <InfoAlert text={this.state.infoText} style={{ visibility: this.state.visibility }} />
                 <input type="text" className="city" value={this.state.query} onChange={this.handleInputChanged} onFocus={() => { this.setState({ showSuggestions: true }) }} />
