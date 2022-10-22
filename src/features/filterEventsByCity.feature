@@ -16,3 +16,6 @@ Feature: Filter events by city
         When the user selects a city (e.g., “Berlin, Germany”) from the list
         Then their city should be changed to that city (i.e., “Berlin, Germany”)
         And the user should receive a list of upcoming events in that city
+
+
+

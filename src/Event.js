@@ -20,7 +20,7 @@ class Event extends Component {
                 isVisible: false
             })
         }
-        console.log(this.state.isVisible)
+
     };
 
     render() {

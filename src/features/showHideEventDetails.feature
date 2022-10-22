@@ -13,4 +13,4 @@ Feature: Show/Hide an Event Details
     Scenario: User can collapse an event to hide its details.
         Given The event element is showing the event details.
         When The user clicks on the details button again.
-        Then The event details part of the event elemnt is collapsed.
+        Then The event details part of the event element is collapsed.

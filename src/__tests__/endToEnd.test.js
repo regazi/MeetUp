@@ -1,4 +1,4 @@
-import { puppeteer } from 'puppeteer';
+import puppeteer from 'puppeteer';
 
 describe('show/hide an event details', () => {
     let browser;
@@ -6,9 +6,9 @@ describe('show/hide an event details', () => {
     beforeAll(async () => {
         jest.setTimeout(30000);
         browser = await puppeteer.launch({
-            /* headless: false,
-             slowMo: 250,
-             ignoreDefaultArgs: ['--disable-extensions']*/
+            executablePath: 'chrome.exe',
+            headless: true,
+            args: ['--no-sandbox', '--disable-setuid-sandbox']
         });
         page = await browser.newPage();
         await page.goto('http://localhost:3000/');

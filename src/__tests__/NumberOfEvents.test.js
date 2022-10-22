@@ -8,7 +8,7 @@ describe('<NumberOfEvents /> component', () => {
     let locations, NoEwrapper;
     beforeAll(() => {
         locations = extractLocations(mockData);
-        NoEwrapper = shallow(<NumberOfEvents locations={locations} />);
+        NoEwrapper = shallow(<NumberOfEvents locations={locations} updateNumberOfEvents={() => { }} />);
 
     });
 
@@ -48,8 +48,8 @@ describe('<NumberOfEvents /> component', () => {
         NoEwrapper.setState({
             query: 30
         });
-        const Event = { target: { value: 6 } };
-        NoEwrapper.find('.numberOfEvents').simulate('change', Event);
-        expect(NoEwrapper.state('numberOfEvents')).toBe(6);
+        const eventObject = { target: { value: '6' } };
+        NoEwrapper.find('.numberOfEvents').simulate('input', eventObject);
+        expect(NoEwrapper.state('query')).toBe(6);
     });
 });
