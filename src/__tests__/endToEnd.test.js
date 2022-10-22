@@ -12,7 +12,7 @@ describe('show/hide an event details', () => {
         });
         page = await browser.newPage();
         await page.goto('http://localhost:3000/');
-        await page.waitForSelector('.event');
+        await page.waitForSelector('.event-item');
     });
 
     afterAll(() => {
@@ -20,20 +20,20 @@ describe('show/hide an event details', () => {
     });
 
     test('An event element is collapsed by default', async () => {
-        const eventDetails = await page.$('.event .event__Details');
+        const eventDetails = await page.$('.event-item .event-details');
         expect(eventDetails).toBeNull();
         browser.close();
     });
 
     test('User can expand an event to see its details', async () => {
-        const eventDetails = await page.$('.event .event__Details');
+        const eventDetails = await page.$('.event-item .event-details');
         expect(eventDetails).toBeDefined();
         browser.close();
     });
 
     test('User can collapse an event to hide its details', async () => {
-        await page.click('.event .details-btn');
-        const eventDetails = await page.$('.event .event__Details');
+        await page.click('-item .toggle-collapse');
+        const eventDetails = await page.$('.event-item .event-details');
         expect(eventDetails).toBeNull();
     });
 });
@@ -50,7 +50,7 @@ describe('Filter events by city.', () => {
         });
         page = await browser.newPage();
         await page.goto('http://localhost:3000/');
-        await page.waitForSelector('.event');
+        await page.waitForSelector('.event-item');
     });
 
     afterAll(() => {
@@ -59,7 +59,7 @@ describe('Filter events by city.', () => {
 
     test('When user hasn’t searched for a city, show upcoming events from all cities', async () => {
         const countEvents = await page.$$eval(
-            '.event',
+            '.event-item',
             (element) => element.length
         );
         expect(countEvents).toBe(2);
@@ -79,7 +79,7 @@ describe('Filter events by city.', () => {
         await page.type('.city', 'Berlin', { delay: 100 }); //type slower than user
         await page.click('.suggestions li');
         const countEvents = await page.$$eval(
-            '.event',
+            '.event-item',
             (element) => element.length
         );
         expect(countEvents).toBe(1);
