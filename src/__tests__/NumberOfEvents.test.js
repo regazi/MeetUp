@@ -31,7 +31,7 @@ describe('<NumberOfEvents /> component', () => {
             query: '10'
         });
         const eventObject = { target: { value: '5' } };
-        NoEwrapper.find('.numberOfEvents').simulate('input', eventObject);
+        NoEwrapper.find('.numberOfEvents').simulate('change', eventObject);
         //Note: data type converted to int in validation code
         expect(NoEwrapper.state('query')).toBe(5);
     });
@@ -40,7 +40,7 @@ describe('<NumberOfEvents /> component', () => {
             query: 10
         });
         const eventObject = { target: { value: '40' } };
-        NoEwrapper.find('.numberOfEvents').simulate('input', eventObject);
+        NoEwrapper.find('.numberOfEvents').simulate('change', eventObject);
         expect(NoEwrapper.state('query')).toBe(30);
     });
 
@@ -49,7 +49,7 @@ describe('<NumberOfEvents /> component', () => {
             query: 30
         });
         const eventObject = { target: { value: '6' } };
-        NoEwrapper.find('.numberOfEvents').simulate('input', eventObject);
+        NoEwrapper.find('.numberOfEvents').simulate('change', eventObject);
         expect(NoEwrapper.state('query')).toBe(6);
     });
 });
