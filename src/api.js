@@ -2,6 +2,7 @@ import { mockData } from './mock-data';
 import axios from 'axios';
 import NProgress from 'nprogress';
 
+
 export const extractLocations = (events) => {
     let extractLocations = events.map((event) => event.location);
     let locations = [...new Set(extractLocations)];
@@ -13,11 +14,13 @@ const getToken = async (code) => {
         `${'https://d2tvi9usq2.execute-api.us-east-1.amazonaws.com/dev/api/token/' + encodeCode}`
     )
         .then((res) => {
+
             return res.json();
+
         })
         .catch((err) => err);
     access_token && localStorage.setItem("access_token", access_token);
-
+    console.log(`token = ${access_token}`)
     return access_token;
 };
 
@@ -70,8 +73,10 @@ export const getEvents = async () => {
         NProgress.done();
         return mockData;
     }
-    if (!navigator.onLine) {
+    if (navigator.onLine === false) {
+        console.log("offline from api.js")
         const data = localStorage.getItem("lastEvents");
+
         NProgress.done();
         return data ? JSON.parse(data).events : [];;
     }

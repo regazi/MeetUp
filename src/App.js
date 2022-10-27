@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import WelcomeScreen from './WelcomeScreen';
+import WelcomeScreen from './welcomeScreen';
 import { getEvents, extractLocations, checkToken, getAccessToken } from
   './api';
 import './nprogress.css';
@@ -8,14 +8,22 @@ import EventList from './EventList';
 import NumberOfEvents from './NumberOfEvents';
 import CitySearch from './CitySearch';
 import { mockData } from "./mock-data";
+
+import { InfoAlert } from './Alert';
 class App extends Component {
   state = {
-    events: mockData,
-    locations: extractLocations(mockData),
+    events: [],
+    locations: mockData,
     showWelcomeScreen: undefined,
   }
 
   async componentDidMount() {
+    if (navigator.onLine === false) {
+      console.log("offline")
+    }
+    if (navigator.onLine === true) {
+      console.log("online")
+    }
     this.mounted = true;
     const accessToken = localStorage.getItem('access_token');
     const isTokenValid = (await checkToken(accessToken)).error ? false :
@@ -23,10 +31,16 @@ class App extends Component {
     const searchParams = new URLSearchParams(window.location.search);
     const code = searchParams.get("code");
     this.setState({ showWelcomeScreen: !(code || isTokenValid) });
+    console.log("made it to conditional in componentdidmount")
+    console.log(`code: ${code}, isTokenValid: ${isTokenValid}, mounted: ${this.mounted}`)
     if ((code || isTokenValid) && this.mounted) {
+      console.log("about to call getEvents")
       getEvents().then((events) => {
         if (this.mounted) {
           this.setState({ events, locations: extractLocations(events) });
+        }
+        else {
+          console.log("did not call get events")
         }
       });
     }
@@ -64,12 +78,18 @@ class App extends Component {
 
     return (
       <div className="App">
-        <WelcomeScreen showWelcomeScreen={this.state.showWelcomeScreen}
-          getAccessToken={() => { getAccessToken() }} />
+        <div className='offline-alert'>{navigator.onLine === false && (
+          <InfoAlert
+            infoText={
+              'App is in offline mode'
+            }
+          />)}</div>
+
         <CitySearch locations={this.state.locations} updateEvents={this.updateEvents} />
         <NumberOfEvents events={this.state.events} updateNumberOfEvents={this.updateNumberOfEvents} />
         <EventList events={this.state.events} />
-
+        <WelcomeScreen showWelcomeScreen={this.state.showWelcomeScreen}
+          getAccessToken={() => { getAccessToken() }} />
       </div>
     );
   }

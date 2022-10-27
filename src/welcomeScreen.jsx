@@ -1,4 +1,7 @@
+import "./welcomeScreen.css";
+
 function WelcomeScreen(props) {
+  console.log("welcome");
   return props.showWelcomeScreen ? (
     <div className="WelcomeScreen">
       <h1>Welcome to the Meet app</h1>
@@ -6,28 +9,19 @@ function WelcomeScreen(props) {
         Log in to see upcoming events around the world for full-stack developers
       </h4>
       <div className="button_cont" align="center">
-        <div class="google-btn">
-          <div class="google-icon-wrapper">
-            <img
-              class="google-icon"
-              src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Log
-    o.svg"
-              alt="Google sign-in"
-            />
-          </div>
-          <button
-            onClick={() => {
-              props.getAccessToken();
-            }}
-            rel="nofollow noopener"
-            class="btn-text"
-          >
-            <b>Sign in with google</b>
-          </button>
-        </div>
+        <button
+          className="google-btn btn-text"
+          onClick={() => {
+            props.getAccessToken();
+          }}
+          rel="nofollow noopener"
+        >
+          <b>Sign in with google</b>
+        </button>
       </div>
+
       <a
-        href="https://YOUR_GITHUB_USERNAME.github.io/meet/privacy.html"
+        href="https://regazi.github.io/MeetUp/privacy.html"
         rel="nofollow noopener"
       >
         Privacy policy
