@@ -20,7 +20,6 @@ const getToken = async (code) => {
         })
         .catch((err) => err);
     access_token && localStorage.setItem("access_token", access_token);
-    console.log(`token = ${access_token}`)
     return access_token;
 };
 
@@ -74,7 +73,6 @@ export const getEvents = async () => {
         return mockData;
     }
     if (navigator.onLine === false) {
-        console.log("offline from api.js")
         const data = localStorage.getItem("lastEvents");
 
         NProgress.done();

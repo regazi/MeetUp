@@ -91,8 +91,9 @@ input[type="number"] {
   bottom: 5px;
   padding: 5px 8px;
   border-radius: 4px;
-  outline: none;
+  border: none;
   cursor: pointer;
+  box-shadow: 0 2px 4px #d6535323;
 }
 
 .name {
@@ -177,11 +178,12 @@ input[type="number"] {
 }
 .google-btn:hover,
 .toggle-collapse:hover {
-  box-shadow: 0 0 6px #4285f4;
+  box-shadow: 0 0 6px #d6535384; 
 }
 .google-btn:active,
 .toggle-collapse:active {
-  background: #1669f2;
+  background: #1364c781;
+  box-shadow: 0 0 6px #4285f4;
 }
 .google-icon-wrapper {
   position: absolute;
@@ -206,6 +208,9 @@ input[type="number"] {
   font-size: 14px;
   letter-spacing: 0.2px;
   font-family: "Roboto";
+}
+.recharts-wrapper{
+  box-shadow: 0 0 6px #8d323238;
 }
 
 
