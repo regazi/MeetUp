@@ -7,19 +7,21 @@ import './App.css';
 import EventList from './EventList';
 import NumberOfEvents from './NumberOfEvents';
 import CitySearch from './CitySearch';
-import { mockData } from "./mock-data";
-import {
-  ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip,
-  ResponsiveContainer
-} from 'recharts';
 import GenreGraph from './Genre';
 
+import Tab from 'react-bootstrap/Tab';
+import Tabs from 'react-bootstrap/Tabs';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 import { InfoAlert } from './Alert';
+import CityGraph from './CityGraph';
 class App extends Component {
   state = {
     events: [],
     locations: [],
     showWelcomeScreen: undefined,
+    numOfEvents: 10,
+    key: "City"
   }
 
   async componentDidMount() {
@@ -42,7 +44,7 @@ class App extends Component {
       if ((code || isTokenValid) && this.mounted) {
         getEvents().then((events) => {
           if (this.mounted) {
-            this.setState({ events, locations: extractLocations(events) });
+            this.setState({ events, locations: extractLocations(events), numOfEvents: 10 });
           }
         });
       }
@@ -51,6 +53,12 @@ class App extends Component {
   componentWillUnmount() {
     this.mounted = false;
   }
+  setKey(tab) {
+    this.setState({
+      key: tab
+    })
+  }
+  /*
   getData = () => {
     const { locations, events } = this.state;
     const data = locations.map((location) => {
@@ -60,6 +68,7 @@ class App extends Component {
     })
     return data;
   };
+  */
   updateEvents = (location) => {
     getEvents().then((events) => {
       const locationEvents = (location === 'all') ?
@@ -71,21 +80,14 @@ class App extends Component {
     });
   }
   updateNumberOfEvents = (number) => {
-    getEvents().then((events) => {
-      let updatedEvents = []
-      for (let i = 1; i <= number; i++) {
-        updatedEvents.push(events[i])
-
-      }
-      this.setState({
-        events: updatedEvents
-      });
+    this.setState({
+      numOfEvents: number,
     });
   }
 
   render() {
     if (this.state.showWelcomeScreen === undefined) return <div
-      className="App whynorender" />
+      className="App" />
 
     return (
       <div className="App">
@@ -94,25 +96,26 @@ class App extends Component {
             text={'App running in offline mode --- App running in offline mode --- App running in offline mode --- App running in offline mode '} style={{ visibility: 'visible' }}
           />)}</div>
 
-        <CitySearch locations={this.state.locations} updateEvents={this.updateEvents} />
-        <NumberOfEvents events={this.state.events} updateNumberOfEvents={this.updateNumberOfEvents} />
-        <GenreGraph events={this.state.events} />
-        <ResponsiveContainer height={400} >
+        <CitySearch locations={this.state.locations} updateEvents={this.updateEvents} updateNumberOfEvents={this.updateNumberOfEvents} />
+        <NumberOfEvents events={this.state.events} updateNumberOfEvents={this.updateNumberOfEvents} numOfEvents={this.numOfEvents} />
+        <div>
+          <Tabs
+            id="controlled-tab-example"
+            activeKey={this.key}
+            onSelect={(k) => this.setKey(k)}
+            className="mb-3"
+          >
+            <Tab eventKey="Cities" title="Cities">
+              <CityGraph events={this.state.events} locations={this.state.locations} />
+            </Tab>
+            <Tab eventKey="Themes" title="Themes">
+              <GenreGraph events={this.state.events} />
+            </Tab>
+          </Tabs>
 
-          <ScatterChart margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
-            <CartesianGrid />
-            <XAxis type="category" dataKey="city" name="city" />
-            <YAxis
-              allowDecimals={false}
-              type="number"
-              dataKey="number"
-              name="number of events"
-            />
-            <Tooltip cursor={{ strokeDasharray: "3 3" }} />
-            <Scatter name="Event" data={this.getData()} fill="#8884d8" />
-          </ScatterChart>
-        </ResponsiveContainer>
-        <EventList events={this.state.events} />
+
+        </div>
+        <EventList events={this.state.events.slice(0, this.state.numOfEvents)} />
         <WelcomeScreen showWelcomeScreen={this.state.showWelcomeScreen}
           getAccessToken={() => { getAccessToken() }} />
 

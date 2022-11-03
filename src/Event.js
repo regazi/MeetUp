@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import './Event.css'
+import Card from 'react-bootstrap/Card'
 
 
 class Event extends Component {
@@ -29,17 +30,23 @@ class Event extends Component {
 
         return (
             <div className='event-item'>
-                <h2>{event.summary}</h2>
-                <p>{event.description}</p>
+                <Card>
+                    <Card.Header classNme="cardHeader">
+                        <Card.Title>{event.summary}</Card.Title>
+                    </Card.Header>
+                    <Card.Body>
+                        <p>{event.description}</p>
 
-                <div className={isVisible === true ? "event-details visible" : "event-details"}>
-                    <h3>Location: {event.location}</h3>
-                    <p>From: {event.start.dateTime}</p>
-                    <p>Until: {event.end.dateTime}</p>
-                </div>
-                <button className='toggle-collapse' onClick={this.clickHandler}>
-                    Details
-                </button>
+                        <div className={isVisible === true ? "event-details visible" : "event-details"}>
+                            <h3>Location: {event.location}</h3>
+                            <p>From: {event.start.dateTime}</p>
+                            <p>Until: {event.end.dateTime}</p>
+                        </div>
+                        <button className='toggle-collapse' onClick={this.clickHandler}>
+                            Details
+                        </button>
+                    </Card.Body>
+                </Card>
             </div>
         );
     }

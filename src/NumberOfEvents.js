@@ -3,29 +3,26 @@ import { ErrorAlert } from './Alert';
 
 class NumberOfEvents extends Component {
     state = {
-        query: 10
+
     }
     componentDidMount() {
         this.setState({
-            visibility: 'hidden'
+            visibility: 'hidden',
         })
     }
     setValue = (value, message) => {
         if (!message) {
             this.setState({
-                query: value,
                 visibility: "hidden"
 
             })
             this.props.updateNumberOfEvents(value)
         } else {
             this.setState({
-                query: value,
                 visibility: "visible",
                 infoText: message,
 
             })
-            this.props.updateNumberOfEvents(value)
         }
 
     }
@@ -50,7 +47,7 @@ class NumberOfEvents extends Component {
         return (
             <form className="numberOfEventsInput">
                 <ErrorAlert style={{ visibility: this.state.visibility }} text={this.state.infoText} />
-                <input type="number" className="numberOfEvents" value={this.state.query} onChange={this.handleInputChanged} />
+                <input type="number" className="numberOfEvents" value={this.props.numOfEvents} placeholder="10" onChange={this.handleInputChanged} />
             </form>
 
 

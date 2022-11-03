@@ -85,8 +85,10 @@ input[type="number"] {
   position: relative;
 }
 
+
 .toggle-collapse {
   position: absolute;
+  background:rgb(75, 152, 156) ;
   right: 5px;
   bottom: 5px;
   padding: 5px 8px;
@@ -211,6 +213,9 @@ input[type="number"] {
 }
 .recharts-wrapper{
   box-shadow: 0 0 6px #8d323238;
+}
+.EventList{
+margin-top: 1%;
 }
 
 
