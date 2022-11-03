@@ -12,6 +12,7 @@ import {
   ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip,
   ResponsiveContainer
 } from 'recharts';
+import GenreGraph from './Genre';
 
 import { InfoAlert } from './Alert';
 class App extends Component {
@@ -95,8 +96,9 @@ class App extends Component {
 
         <CitySearch locations={this.state.locations} updateEvents={this.updateEvents} />
         <NumberOfEvents events={this.state.events} updateNumberOfEvents={this.updateNumberOfEvents} />
-
+        <GenreGraph events={this.state.events} />
         <ResponsiveContainer height={400} >
+
           <ScatterChart margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
             <CartesianGrid />
             <XAxis type="category" dataKey="city" name="city" />
